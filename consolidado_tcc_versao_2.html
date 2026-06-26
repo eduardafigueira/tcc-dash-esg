@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Analítico de Evidências ESG — TCC (Completo)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'Segoe UI', 'sans-serif'] },
+                    colors: {
+                        brand: { dark: '#1a365d', light: '#2b6cb0', bg: '#f8fafc', surface: '#ffffff' },
+                        status: { success: '#38a169', error: '#e53e3e', warning: '#dd6b20' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .tab-content, .perspective-content { display: none; }
+        .tab-content.active, .perspective-content.active { display: block; animation: fadeIn 0.25s ease-in-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(3px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, padding 0.35s ease;
+        }
+        .accordion-icon { transition: transform 0.2s ease; }
+        
+        .academic-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; margin-bottom: 0.5rem; font-size: 0.8rem; }
+        .academic-table th { background-color: #1a365d; color: white; padding: 0.5rem; text-align: left; border: 1px solid #e2e8f0; }
+        .academic-table td { padding: 0.5rem; border: 1px solid #e2e8f0; vertical-align: top; }
+        .academic-table tr:nth-child(even) { background-color: #f8fafc; }
+        .academic-table tr:nth-child(odd) { background-color: #ffffff; }
+
+        .comparative-table th { background-color: #f1f5f9; color: #334155; font-weight: 700; border-bottom: 2px solid #cbd5e1; }
+        .comparative-table td { border-bottom: 1px solid #e2e8f0; }
+
+        .custom-scroll::-webkit-scrollbar { height: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-brand-bg text-gray-800 font-sans min-h-screen flex flex-col">
+
+    <header class="bg-brand-dark text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight">O Impacto Socioambiental das Métricas ESG no Mercado Financeiro</h1>
+                <p class="text-xs text-blue-200 mt-1 font-medium">Dashboard de Consolidação Epistêmica - Visão Desagregada Integral</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-white border-b border-gray-200 shadow-sm sticky top-[72px] z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex overflow-x-auto custom-scroll space-x-6 py-2" aria-label="Hypotheses">
+                <button onclick="switchMainTab('h1')" id="tab-btn-h1" class="main-tab-btn whitespace-nowrap py-3 px-3 border-b-2 font-semibold text-sm border-brand-light text-brand-dark transition-all">H1: Scores ESG</button>
+                <button onclick="switchMainTab('h2')" id="tab-btn-h2" class="main-tab-btn whitespace-nowrap py-3 px-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-semibold text-sm transition-all">H2: Disparidade de Alocação</button>
+                <button onclick="switchMainTab('h3')" id="tab-btn-h3" class="main-tab-btn whitespace-nowrap py-3 px-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-semibold text-sm transition-all">H3: Políticas de Restrição</button>
+                <button onclick="switchMainTab('h4')" id="tab-btn-h4" class="main-tab-btn whitespace-nowrap py-3 px-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-semibold text-sm transition-all">H4: Compensação</button>
+                <!-- Botão Comparativo: Azul escuro, sem borda por padrão -->
+                <button onclick="switchMainTab('side')" id="tab-btn-side" class="main-tab-btn whitespace-nowrap py-3 px-3 border-b-2 border-transparent text-brand-dark hover:text-brand-light font-bold text-sm transition-all ml-auto">Comparativo Geral</button>
+            </nav>
+        </div>
+    </div>
+
+    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6" id="main-content">
+        <!-- O conteúdo será injetado pelo JavaScript para garantir as 10 etapas completas de forma limpa -->
+    </main>
+
+    <script>
+        // =====================================================================
+        // DADOS INTEGRAIS DOS RELATÓRIOS (Textos completos das Etapas 1 a 10)
+        // =====================================================================
+        
+        // --- H1: SCORES ESG ---
+        const h1Gemini = [
+            "<strong>A1:</strong> Scores ESG atuam como preditores de eficiência socioambiental futura ou latente. (Tipo: Causal / Preditiva)<br><strong>A2:</strong> Carteiras com high-ESG geram benefícios físicos mensuráveis (emissões evitadas, etc.). (Tipo: Causal / Quantificável)<br><strong>A3:</strong> A magnitude do benefício socioambiental é equivalente ou superior ao retorno financeiro. (Tipo: Normativa / Relacional)<br><br><strong>Pressupostos Implícitos:</strong><br>• P_I1: Scores ESG são projetados para medir impacto sistêmico ('Double Materiality') e não apenas risco financeiro ('Single Materiality') <b>[Problemático]</b>.<br>• P_I2: Existe homogeneidade na mensuração dos scores entre diferentes agências <b>[Não evidenciado]</b>.<br>• P_I3: Instituições Financeiras relatam de forma fidedigna as 'Emissões Financiadas' <b>[Parcialmente evidenciado]</b>.",
+            "<strong>H1 (Hipótese de Convergência / Otimista):</strong> Os scores ESG de fato capturam o compromisso ambiental profundo das instituições. Agências conseguem medir externalidades e o mercado precifica isso de forma eficiente.<br><br><strong>H2 (Hipótese do Desacoplamento e Greenwashing Institucional - OBRIGATÓRIA):</strong> Scores ESG medem estritamente mitigação de risco financeiro próprio (Single Materiality) e sofrem de intenso viés declaratório ('ESG Decoupling'). Ocorre correlação negativa entre a 'performance aparente' e o 'impacto real'.<br><br><strong>H3 (Hipótese da Heterogeneidade Estrutural):</strong> A validade preditiva do score depende do tipo de carteira e do porte da instituição. Grandes bancos inflam ratings através de consultorias.",
+            "<table class='academic-table'><tr><th>Hipótese</th><th>Evidência Necessária</th><th>Status</th></tr><tr><td>H1</td><td>Séries temporais cruzando Scores (MSCI) com inventários de GEE (Escopo 3).</td><td>Limitado (Escopo 3 ainda mal reportado)</td></tr><tr><td>H2</td><td>Estudos empíricos medindo 'Rating Divergence' e evidências quantitativas de 'ESG Decoupling'.</td><td>Disponível (Alta documentação na literatura)</td></tr><tr><td>H3</td><td>Dados granulares da CVM sobre composição de carteiras rotuladas 'ESG'.</td><td>Crítico/Indisponível (Exige raspagem de dados própria)</td></tr></table>",
+            "<strong>Evidência A: Estudo sobre Divergência de Ratings ESG (Berg et al.) [VERIFICADA]</strong><br>Altamente consistente. É o trabalho seminal mostrando que 56% da variação de scores vem de divergência de medição.<br><br><strong>Evidência B: Desacoplamento ESG e Risco de Greenwashing (Kathan et al., 2025) [VERIFICADA]</strong><br>Confirma empiricamente que altas pontuações ESG correlacionam com performance aparente, não com impacto real.<br><br><strong>Evidência C: Alinhamento das Carteiras de Fundos Brasileiros (CVM) [INFERIDA]</strong><br>Consistente com relatórios setoriais da Anbima sobre fundos IS.",
+            "<strong>Argumento Abdutivo:</strong><br>Premissa 1: Metodologias predominantes de Score ESG foram desenhadas para avaliar risco ao balanço (Single Materiality).<br>Premissa 2: Estudos empíricos recentes demonstram que empresas com maiores pontuações ESG apresentam maiores taxas de 'greenwashing'.<br>Conclusão: É logicamente incorreto assumir universalmente que Score ESG prevê eficiência socioambiental. No Brasil, as carteiras com melhores pontuações ESG tendem a capturar empresas com alta capacidade de compliance, mantendo as externalidades reais inalteradas.",
+            "<table class='academic-table'><tr><th>Teste Empírico</th><th>Fonte de Dados</th><th>Método</th></tr><tr><td>Correlação: Score x Emissões Financiadas</td><td>Bloomberg/Refinitiv e Relatórios B3</td><td>Regressão em Painel (Efeitos Fixos). Falseia H2 se houver redução absoluta de emissões alinhada à subida do Score.</td></tr><tr><td>Análise de Desacoplamento (Decoupling)</td><td>Formulários de Referência CVM (CVM 59)</td><td>Análise Lexical (NLP) de textos ESG vs. Capex verde real. Falseia H1 se o volume de menções textuais crescer sem aumento do Capex.</td></tr></table>",
+            "<strong>Conclusão Provisória (Grau de Confiança: ALTO):</strong> A hipótese original do TCC baseia-se num equívoco epistêmico (a confusão entre risco financeiro e impacto ambiental). Evidências demonstram a predominância do fenômeno de desacoplamento institucional. As métricas não garantem impacto proporcional.",
+            "A Conclusão Provisória seria falseada se:<br>1. A CVM liberar dados provando que 80% das ações listadas no ISE B3 cortaram suas emissões absolutas (Escopo 1, 2 e 3) em linha com o Acordo de Paris, superando pares fora do índice.<br>2. Artigos acadêmicos de 2026 demonstrarem que as metodologias da Refinitiv zeraram a divergência e atingiram R² de 0.9 com o impacto físico real.",
+            "<strong>Limitações da IA e Validação Humana Necessária:</strong><br>• O modelo infere comportamento da CVM e extrapola conexões de greenwashing de mercados globais aplicáveis a mercados emergentes.<br>• <strong>Prioridade:</strong> O estudante deve obrigatoriamente baixar os dados do ISE B3, buscar no terminal Economatica as pontuações específicas e mapear os bancos de capital aberto que publicam o Escopo 3 (Financed Emissions).",
+            "<strong>1. Berg, J. F. Kölbel, R. Rigobon (2022)</strong>: 'Aggregate Confusion: The Divergence of ESG Ratings' (Review of Finance). Medição = 56% da variação. <b>[REFUTA H1]</b><br><strong>2. Kathan, Utz, Dorfleitner (2025)</strong>: 'What you see is not what you get: ESG scores and greenwashing risk'. Correlaciona negativamente impacto real ambiental com scores altos. <b>[REFUTA H1]</b><br><strong>3. Estudos MDPI/Emerald (2024/2026)</strong>: Confirmam 'Environmental Decoupling' corporativo (empresas aumentam volume de palavras 'talk' mas não mostram ação 'walk'). <b>[SUPORTA H3]</b>"
+        ];
+
+        const h1Claude = [
+            "A hipótese contém três afirmações encadeadas: (A1) Scores são preditores válidos; (A2) Carteiras geram benefícios físicos; (A3) Benefícios são proporcionais aos retornos.<br><strong>Alerta Metodológico:</strong> O relatório 'Who Cares Wins' (2004) citado como fundamento é um documento de advocacy/normativo, não empírico. Além disso, o conceito de 'emissões evitadas' é contrafactual e não possui padronização formal no GHG Protocol.",
+            "<strong>H1 (Validade Preditiva):</strong> Scores capturam genuinamente a eficiência socioambiental e geram impacto proporcional.<br><strong>H2 (Desacoplamento - OBRIGATÓRIA):</strong> Scores medem primariamente qualidade de disclosure e sofisticação comunicacional. O 'lucro verde' é um artefato de assimetria informacional.<br><strong>H3 (Mediação Regulatória):</strong> A correlação só existe quando mediada por pressão regulatória obrigatória (ex: taxonomia europeia ou CVM 193/2023).",
+            "Para testar a validade preditiva, é necessário ter acesso a:<br>1. Scores históricos de agências (MSCI, Refinitiv) (Acesso Limitado).<br>2. Metodologia de cálculo de emissões contrafactuais (Indisponível universalmente).<br>3. Comparativo regulatório Brasil vs União Europeia (Inferido).",
+            "<table class='academic-table'><tr><th>Evidência</th><th>Status</th><th>Detalhe</th></tr><tr><td>Divergência de scores (Berg et al.)</td><td>INFERIDA</td><td>Correlação de ~0.54 mina diretamente a premissa de validade.</td></tr><tr><td>Relatório Who Cares Wins</td><td>CONTRADITÓRIA</td><td>Advocacy sem dados empíricos de impacto.</td></tr><tr><td>Resolução CVM 193/2023</td><td>INFERIDA</td><td>Adota IFRS S1/S2 (Voluntário 24, Obrigatório 26).</td></tr><tr><td>Relatório OCDE (Boffo & Patalano)</td><td>INFERIDA</td><td>Em 2 de 3 agências, scores 'E' tiveram correlação positiva com emissões.</td></tr></table>",
+            "A cadeia dedutiva para H1 colapsa logo na Premissa 1 ('Scores medem eficiência real') devido à evidência da divergência metodológica maciça. O raciocínio para H2 é Indutivo: Empresas com mais recursos produzem melhor disclosure (sinalização) e recebem melhores scores, mesmo possuindo uma pegada ambiental absoluta vasta.",
+            "<strong>Teste 1:</strong> Regressão em Painel cruzando Score ESG e Emissões Reais. Controlar por tamanho da firma. Falseia H1 se a correlação for nula ou positiva.<br><strong>Teste 2:</strong> Desempenho ISE B3 vs Ibovespa com Decomposição de Impacto. Calcular a Intensidade de Carbono Média Ponderada (WACI). Falseia H1 se o ISE não apresentar um WACI estatisticamente menor que o índice padrão.",
+            "<strong>Conclusão Provisória (Grau: MÉDIO):</strong> A hipótese, como formulada, é provavelmente falsa em sua forma forte. Scores ESG não são preditores confiáveis de impacto, e a 'proporcionalidade' financeira é indemonstrável sem métricas contrafactuais. H2 (Desacoplamento) é a mais consistente com as evidências.",
+            "Critérios de Falsificação da Conclusão Provisória:<br>1. Se um estudo empírico brasileiro (2018-2025) demonstrar correlação negativa e significativa (p < 0.05) entre score ESG e emissões controlando disclosure.<br>2. Se o WACI do ISE B3 for consistentemente menor que o Ibovespa por mais de 10 anos.<br>3. Correlação entre scores de agências diferentes atingir > 0.85.",
+            "A análise depende pesadamente de padrões estatísticos da literatura internacional sobre finanças sustentáveis (SFDR, Verra). Exige verificação empírica humana rigorosa utilizando softwares estatísticos para o cálculo do WACI das empresas do ISE B3.",
+            "<strong>Lacuna Crítica no Brasil:</strong> Há abundância de papers comparando apenas os retornos financeiros do ISE B3, mas uma lacuna de testes sobre o impacto físico destas empresas.<br><strong>Refs:</strong><br>• Berg et al. (2022) <b>[REFUTA]</b><br>• Christensen et al. (2022) <b>[REFUTA]</b><br>• Gibson Brandon et al. (2021) <b>[REFUTA]</b><br>• Boffo & Patalano (OCDE, 2020) <b>[REFUTA]</b>"
+        ];
+
+        // --- H2: DISPARIDADE DE ALOCAÇÃO ---
+        const h2Gemini = [
+            "<strong>A1:</strong> O volume de capital em produtos rotulados 'ESG' apresenta magnitude expressiva.<br><strong>A2:</strong> IFs reportam indicadores físicos reais.<br><strong>A3:</strong> Há disparidade entre o delta de capital e o delta de melhora física.<br><strong>Pressupostos Implícitos:</strong> P_I1: Espera-se que fundos tenham 'Adicionalidade' (Problemático: secundário não gera). P_I2: Capital rotulado é para projetos novos (Capex).",
+            "<strong>H1 (Adicionalidade Nula):</strong> A disparidade é real. Capital flui esmagadoramente para mercados secundários (compra de ações), não alterando custo de capital suficiente para forçar a economia a descarbonizar.<br><strong>H2 (Time-Lag e Erro de Medição - OBRIGATÓRIA):</strong> Ilusão temporária causada por defasagem. Obras de engenharia (matriz energética) levam de 5 a 10 anos para refletir.<br><strong>H3 (Segmentação de Produto):</strong> Disparidade depende estritamente do instrumento. Mínima em Green Bonds primários, gigantesca em ETFs.",
+            "Para H1: Comparativo temporal entre volume financeiro ANBIMA e emissões físicas (Esforço alto).<br>Para H2: Estudos de Capex Verde vs Time-to-operation (Disponível).<br>Para H3: Banco de dados de emissões de Green Bonds Brasileiros (CBI) cruzado com alocação (Limitado).",
+            "<strong>Evidência A:</strong> Crescimento de Fundos IS na ANBIMA <b>[VERIFICADA]</b>.<br><strong>Evidência B:</strong> Teoria da Adicionalidade em Mercados Secundários (Berk & van Binsbergen, 2021) <b>[VERIFICADA]</b>. Matematicamente, desinvestir/investir em equity muda custo de capital em frações mínimas (< 1%).",
+            "<strong>Argumento Dedutivo:</strong><br>P1: Capital ESG flui maciçamente para instrumentos de mercado secundário.<br>P2: Operações no secundário transferem propriedade, não injetam dinheiro novo no caixa para construir infraestrutura.<br>Conclusão: As métricas físicas só mudam com injeção de capital novo. Logo, é logicamente inevitável que exista uma disparidade colossal. Hipótese validada.",
+            "<strong>Teste Empírico:</strong> Análise de Disparidade Primário vs Secundário.<br>Método: Testes de médias pareadas (T-test) e análise de variância (ANOVA) do impacto físico gerado por R$ 1 milhão investido em Green Bonds (CBI) comparado ao impacto de Fundos de Ações IS (ANBIMA).",
+            "<strong>Conclusão Provisória (Grau de Confiança: ALTO):</strong> A hipótese da disparidade é cientificamente robusta e validada pela mecânica estrutural do mercado financeiro. O capital segue a lógica de conformidade de portfólio (labels), e não de engenharia de impacto físico.",
+            "A conclusão seria derrubada caso: Apresente-se evidência econométrica forte de que os fluxos maciços para fundos de ações ESG no Brasil reduziram o Custo Médio Ponderado de Capital (WACC) das empresas sujas a ponto de forçá-las, por asfixia, a investir bilhões em Capex de transição rapidamente.",
+            "<strong>Limitação IA:</strong> Inferência abdutiva baseada na literatura global (Berk & van Binsbergen) transposta para o Brasil.<br><strong>Alerta ao Humano:</strong> Não tratar produtos financeiros como bloco único. O pesquisador deve separar explicitamente dados da CVM em 'Mercado Primário' e 'Mercado Secundário'.",
+            "<strong>1. Berk, J. B., & van Binsbergen (2021)</strong>: 'The Impact of Impact Investing'. Prova que impacto no WACC via ações secundárias é < 35 bps. <b>[CRÍTICA]</b><br><strong>2. Heeb, Kölbel, et al. (2022)</strong>: 'Do Investors Care About Impact?'. Investidores alocam por 'warm glow' e são insensíveis à magnitude real da efetividade. <b>[ALTA]</b><br><strong>3. Publicações FEA-USP / FGV (2024-2025)</strong>: 'Mercado de Green Bonds no Brasil'. Muitas emissões primárias servem para refinanciar dívidas passadas, anulando a adicionalidade no ano da emissão. <b>[MISTA]</b>"
+        ];
+
+        const h2Claude = [
+            "<strong>A1:</strong> Existe um volume crescente de capital alocado. <strong>A2:</strong> Existem indicadores ambientais físicos mensuráveis. <strong>A3:</strong> Há uma 'disparidade significativa' entre o capital e a redução proporcional de impacto.<br><br><strong>Fatos Observáveis:</strong> PL de fundos IS atingiu R$ 36,8 bilhões. Resolução CVM 244 (2026) revogou a obrigatoriedade IFRS S1/S2.<br><strong>Pressuposto Problemático:</strong> Confunde materialidade financeira (outside-in) com materialidade de impacto (inside-out).",
+            "<strong>H1 (Otimista-Crítica):</strong> Existe desacoplamento documentável configurando falha de mercado.<br><strong>H2 (Erro Categorial - OBRIGATÓRIA):</strong> A disparidade observada não é falha, mas um artefato de erro categorial. Produtos ESG foram desenhados para gerir risco financeiro, não gerar impacto físico imediato. Esperar redução é atribuir função inexistente.<br><strong>H3 (Mediadora):</strong> A relação depende estritamente de enforcement regulatório robusto e taxonomia forte.",
+            "Necessário: Série temporal do PL de fundos ESG/IS na ANBIMA (Disponível). Dados desagregados de emissões CO2 Escopo 3 (Limitado). Documentação de objetivos dos fundos brasileiros CVM (Disponível).",
+            "<b>[VERIFICADA]</b> Crescimento dos fundos IS no Brasil via imprensa especializada e ANBIMA.<br><b>[VERIFICADA]</b> Resolução CVM nº 244 (maio de 2026) revertendo a obrigatoriedade do reporte climático IFRS.<br><br><span class='bg-red-100 text-red-800 px-2 py-1 font-bold rounded'>⚠ CUIDADO:</span> A referência 'Biehler (2023)' citada na formulação original do estudante não foi localizada em nenhuma base de dados científica de finanças. Trata-se de uma possível alucinação de referência ou citação de área irrelevante (migração). Substituir por Kotsantonis & Serafeim.",
+            "<strong>Argumento para H2 (Erro Categorial):</strong><br>P1: Maioria dos fundos ESG opera sob materialidade financeira.<br>P2: Investimentos no mercado secundário não injetam dinheiro novo.<br>Conclusão: O desacoplamento é um resultado esperado pelo design do produto. A hipótese do estudante, embora com boa intuição empírica, formula a acusação baseando-se numa premissa estruturalmente equivocada sobre a função do instrumento.",
+            "<strong>Teste 1:</strong> Difference-in-Differences (DID) usando propensity score matching para comparar emissões de GEE (Escopo 1+2) de empresas dentro das carteiras de fundos IS vs um grupo de controle idêntico de empresas fora da carteira, cobrindo 2020 a 2025.<br><strong>Teste 2:</strong> Análise de conteúdo dos regulamentos (CVM 175) mapeando a proporção de fundos que declaram objetivos reais de impacto ambiental vs simples integração de risco.",
+            "<strong>Conclusão Provisória (MÉDIO):</strong> A hipótese tem mérito científico documental (o desacoplamento existe globalmente), mas a formulação sofre de graves problemas: trata produtos como bloco homogêneo, assume causalidade direta inexistente e apoia-se numa referência falsa (Biehler). O problema é um Erro Categorial.",
+            "Critério de refutação: A conclusão provisória de erro categorial cairia por terra se a análise dos regulamentos provar que > 70% dos fundos ESG brasileiros declaram contratualmente o objetivo formal e auditável de gerar 'impacto ambiental mensurável' na economia real, quebrando a tese da materialidade de risco.",
+            "O modelo não conseguiu localizar a referência primária citada pelo autor. O estudante é estritamente orientado a confirmar no portal gov.br/cvm a real promulgação da Resolução 244 e a recalibrar os dados da ANBIMA sobre proporção IS x Integração ESG.",
+            "<strong>1. Christensen, Serafeim & Sikochi (2022)</strong>: Substituição recomendada para embasar a teoria da divergência corporativa.<br><strong>2. Marquis, Toffel & Zhou (2016)</strong>: 'Selective Disclosure' e Greenwashing. <b>[CRÍTICA]</b><br><strong>3. Resolução CVM 244 (2026)</strong>: Revogação da obrigatoriedade do IFRS. Documenta a fragilidade do enforcement."
+        ];
+
+        // --- H3: RESTRIÇÃO DE CRÉDITO ---
+        const h3Gemini = [
+            "<strong>A1:</strong> Bancos impõem restrições de crédito (Escopo 3).<br><strong>A2:</strong> Bancos promovem ecoeficiência interna (Escopos 1 e 2).<br><strong>A3:</strong> O mecanismo A1 causa impacto na economia real superior ao A2.<br><br><strong>Fatos Observáveis:</strong> Emissões Financiadas (Escopo 3, Cat. 15) são cerca de 700 vezes maiores que as emissões de agências físicas. O Banco Central implementou a Resolução CMN 4.945/2021 (PRSAC).",
+            "<strong>H1 (Efeito Alavanca):</strong> Precificação do risco socioambiental no modelo de concessão obriga empresas a internalizar custos de transição, sendo o vetor máximo de eficácia.<br><strong>H2 (Vazamento de Crédito / Credit Leakage - OBRIGATÓRIA):</strong> Clientes poluidores rejeitados por grandes bancos migram para shadow banking, bancos menores e cooperativas. Ocorre arbitragem regulatória e a poluição física na atmosfera fica intacta.<br><strong>H3 (Mediada por Integração):</strong> Eficácia só ocorre com bloqueio universal de sistema.",
+            "<strong>H1:</strong> Balanços de GEE de bancos (Domínio público).<br><strong>H2:</strong> Estudos econométricos sobre Credit Leakage no Brasil pós-regulação (Disponível).<br><strong>H3:</strong> Microdados municipais de concessão de crédito do Bureau Rural cruzados com embargos IBAMA (Acesso restrito SISBACEN).",
+            "<strong>Evidência A:</strong> Assimetria de Materialidade CDP (Escopo 3 x Escopo 1/2) <b>[VERIFICADA]</b>. Matemática estrutural irrefutável.<br><strong>Evidência B:</strong> Vazamento de Crédito pós-Regulação (World Bank IDU04c8901a) <b>[VERIFICADA]</b>. Prova que regras rígidas do BCB (ICAAP) reduziram crédito na matriz, mas tiveram impacto moderado/nulo nas emissões reais das empresas por causa de rotas de fuga institucionais.",
+            "<strong>Argumento Dedutivo-Indutivo:</strong><br>Embora a premissa matemática da hipótese (Escopo 3 >>> Escopo 1/2) seja perfeitamente válida e provada (Dedutivo), a afirmação final de que a política restritiva privada é <em>altamente eficaz</em> falha no mundo real. O Vazamento de Crédito (Credit Leakage) mitiga drasticamente os ganhos, tornando a restrição no papel muito mais eficiente que a prática (Indutivo).",
+            "<strong>Estratégia Metodológica Recomendada:</strong><br>1. Utilizar Modelo Linear Generalizado (GLM) para estimar a penalidade no spread baseada em downgrades de score ESG.<br>2. Empregar Algoritmos de Machine Learning (Random Forests/Decision Trees) em microdados públicos do BCB para identificar a 'fronteira de vazamento': o limite exato de spread em que o tomador brasileiro acha mais barato reformar sua fábrica do que buscar capital em cooperativas (shadow banking).",
+            "<strong>Conclusão Provisória (Grau de Confiança: ALTO):</strong> A hipótese original está correta em sua essência matemática (a discrepância do Escopo 3 é monumental), mas peca por excesso de otimismo. A restrição não é perfeitamente eficaz na indução real porque o mercado atua de forma compensatória via 'Credit Leakage'.",
+            "A conclusão do Vazamento seria rigorosamente falseada se: Estatísticas provarem via Ensembles que tomadores rejeitados pelos grandes bancos privados não conseguem, em 100% dos casos, obter recursos alternativos em agentes locais de fomento ou mercados de crédito secundários.",
+            "Dependência pesada do entendimento de que o mercado brasileiro opera como as modelagens ocidentais padrão do Banco Mundial. Recomenda-se extrair inventários do Pólo de Sustentabilidade da B3 para validar fisicamente os números do Itaú, Bradesco e BB contra suas categorias de Escopo 15.",
+            "<strong>1. World Bank (2020/2021)</strong>: 'Climate-Change Regulations: Bank Lending and Real Effects'. Prova que regras do BCB não garantem redução total de GHG nas empresas alvo. <b>[CRÍTICA]</b><br><strong>2. Banco Mundial / Autores BCB (2026)</strong>: 'The Effects of Regulatory Information Systems on Credit Allocation'. Mostra que travamentos automatizados centralizados em tempo real param a evasão. <b>[ALTA]</b><br><strong>3. EBA (2021)</strong>: Risco ESG nas matrizes de Credit Scoring europeias."
+        ];
+
+        // --- H4: COMPENSAÇÃO GOVERNAMENTAL ---
+        const h4Gemini = [
+            "<strong>A1:</strong> Métricas ESG elevam o custo de capital bancário no curto prazo.<br><strong>A2:</strong> Governo disponibiliza linhas subsidiadas.<br><strong>A3:</strong> Os subsídios compensam perfeitamente o aumento do WACC gerando sinergia.<br><br><strong>Pressuposto P_I1:</strong> Spread governamental é grande o suficiente <b>[Problemático]</b>. <strong>P_I2:</strong> Há incentivo fiscal no IRPJ/CSLL dos bancos <b>[Não evidenciado no Brasil]</b>.",
+            "<strong>H1 (Sinergia):</strong> O prêmio do dinheiro estatal compensa o custo ESG, gerando equilíbrio financeiro positivo estável.<br><strong>H2 (Fricção e Assimetria Fiscal - OBRIGATÓRIA):</strong> Os subsídios são limitados e nichados. O custo de adaptar matrizes de crédito à regulação ESG supera as margens de repasse estreitas, operando como centro de custo líquido.<br><strong>H3:</strong> Sinergia ocorre apenas em bancos estatais/cooperativas.",
+            "H2 requer análise do Orçamento Geral da União (OGU) destinação Plano Safra vs. Custo operacional de compliance ESG (Disponível).<br>H3 requer cruzamento de dados de COSIF do Banco Central baseados no controle acionário (Acesso limitado/exige processamento).",
+            "<strong>Evidência A: Estrutura BNDES (VERIFICADA)</strong>: As taxas de remuneração de agente (spread) em linhas Finame Baixo Carbono são tabeladas e engessadas (ex: 1% a 2.5% a.a.).<br><strong>Evidência B: Selic Estrutural (VERIFICADA)</strong>: Séries SGS BACEN atestam que com juros básicos altos, o 'Greenium' nacional (desconto de captação privada) desaparece, invalidando a premissa de capital próprio mais barato.",
+            "<strong>Argumento Abdutivo:</strong> Como os spreads das operações públicas verdes são rigidamente limitados por tetos do BNDES (P1), e não há isenção agressiva na alíquota da CSLL na base do banco (P2), a matemática financeira torna improvável que esses micro-ganhos setoriais compensem o aumento drástico e transversal do custo fixo de adequação de todo o conglomerado bancário.",
+            "<strong>Teste 1 (Modelagem de Impacto ROE):</strong> Aplicar GLM para estimar a sensibilidade da variável '% de Funding Verde Subsidiado/Total de Passivos' sobre a Margem Líquida de Juros (NIM) dos bancos. Falseia H2 se coeficiente for muito positivo.<br><strong>Teste 2:</strong> Diferença-em-Diferenças (DiD) pareando Letras Financeiras Verdes emitidas com LFs convencionais para quantificar a real inexistência empírica do Greenium brasileiro.",
+            "<strong>Conclusão Provisória (Grau de Confiança: MÉDIO):</strong> A hipótese de sinergia perfeita mediada pelo Estado é parcialmente refutada pela realidade fiscal. Os incentivos operam em escala micro (safra/infra) e são engessados em spread, incapazes de neutralizar sistemicamente o aumento generalizado de WACC exigido pelos novos padrões climáticos.",
+            "Falsearia C2 instantaneamente se: O Governo Federal promulgasse legislação garantindo, por exemplo, isenção de 5 pontos na alíquota da CSLL para as instituições financeiras privadas que alcançarem metas transversais verdes (taxonomia), gerando ganho de capital direto na última linha do balanço.",
+            "O banco de dados da IA para impostos é fixado em relatórios históricos. Se a Reforma Tributária Nacional brasileira criar novos benefícios corporativos explícitos na área ESG entre 2025 e a redação, o pesquisador precisará reavaliar manualmente o modelo de lucro contábil das IFs.",
+            "<strong>1. Falcone et al. (2021)</strong>: 'Greening the financial system'. Evidencia que custos de adaptação burocrática privada anulam ganho de subvenção de curto prazo em países de alto risco. <b>[REFUTA H1]</b><br><strong>2. Ensaios ABDE Econômicos (2024-2025)</strong>: Comprova que as travas de spread dos fundos de fomento estatais afastam bancos múltiplos puros. <b>[CRÍTICA PARA O BRASIL]</b><br><strong>3. Taghizadeh-Hesary (2020)</strong>: 'Role of Public-Private Partnerships'. <b>[MISTA]</b>"
+        ];
+
+        // =====================================================================
+        // FUNÇÃO DE RENDERIZAÇÃO DOM
+        // =====================================================================
+        
+        function renderAccordions(containerId, contentsArray, modelName) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const titles = [
+                "Etapa 1 — Observação (Decomposição e Pressupostos)",
+                "Etapa 2 — Hipóteses Concorrentes",
+                "Etapa 3 — Fontes e Evidências Necessárias",
+                "Etapa 4 — Verificação de Evidências",
+                "Etapa 5 — Raciocínio Lógico Subjacente",
+                "Etapa 6 — Proposição de Testes Empíricos e Teóricos",
+                "Etapa 7 — Conclusão Provisória",
+                "Etapa 8 — Critérios de Falsificação",
+                "Etapa 9 — Limitações do Modelo (IA) e Ação Humana",
+                "Etapa 10 — Levantamento Bibliográfico Sistemático"
+            ];
+
+            // Renderiza apenas se houver conteúdo no array (evita preencher placehorders)
+            if (contentsArray && contentsArray.length === 10) {
+                let html = '';
+                for (let i = 0; i < 10; i++) {
+                    html += `
+                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm mb-3">
+                        <button class="w-full text-left p-4 font-bold text-sm text-brand-dark flex justify-between items-center hover:bg-gray-50 transition-colors focus:outline-none" onclick="toggleAccordion(this)">
+                            ${titles[i]}
+                            <svg class="w-5 h-5 accordion-icon text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-4 pt-0 border-t border-gray-100 text-[13px] leading-relaxed text-gray-700 mt-2">
+                                ${contentsArray[i]}
+                            </div>
+                        </div>
+                    </div>`;
+                }
+                container.innerHTML += html;
+            } else {
+                // Conteúdo de Placeholder (ChatGPT e Copilot)
+                let html = `<div class="p-8 bg-gray-50 border border-dashed border-gray-300 rounded-xl text-center text-sm text-gray-500 mb-4">Aguardando inserção de dados do modelo <b>${modelName}</b>.</div>`;
+                for (let i = 0; i < 10; i++) {
+                    html += `
+                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm opacity-60 mb-3">
+                        <button class="w-full text-left p-4 font-semibold text-sm text-brand-dark flex justify-between items-center" onclick="toggleAccordion(this)">
+                            ${titles[i]}
+                            <svg class="w-5 h-5 accordion-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content px-4 text-xs text-gray-500 pb-4 pt-2">Sem dados.</div>
+                    </div>`;
+                }
+                container.innerHTML += html;
+            }
+        }
+
+        // =====================================================================
+        // INICIALIZAÇÃO E CONTROLE DA INTERFACE
+        // =====================================================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mapeia todas as views necessárias no HTML dinamicamente
+            const hypotheses = ['h1', 'h2', 'h3', 'h4'];
+            const models = ['gemini', 'claude', 'chatgpt', 'copilot', 'side'];
+            
+            // Constroi as seções (Sections) e Abas
+            const mainContent = document.getElementById('main-content');
+            
+            // Textos de Header
+            const headers = {
+                'h1': "Os scores ESG das instituições financeiras brasileiras atuam como preditores de eficiência socioambiental, gerando benefícios físicos mensuráveis (emissões evitadas, inclusão financeira) em proporção equivalente ou superior aos retornos financeiros ajustados ao risco para os investidores.",
+                'h2': "Existe uma disparidade significativa entre o volume de capital alocado em produtos financeiros rotulados como 'ESG' e a melhora mensurável em indicadores ambientais físicos (como emissões de CO2 e economia de recursos hídricos) reportados pelas instituições financeiras brasileiras.",
+                'h3': "As políticas de restrição de crédito e as exigências ESG para fornecedores e clientes de grandes bancos brasileiros são mais eficazes na indução de práticas sustentáveis na economia real do que as próprias operações internas (ecoeficiência) das instituições financeiras.",
+                'h4': "Embora a adoção de métricas ESG rigorosas eleve o custo de capital das instituições financeiras no curto prazo, o acesso a linhas de crédito governamentais subsidiadas e incentivos fiscais 'verdes' compensam financeiramente essa transição, tornando o lucro e a sustentabilidade sinérgicos no mercado brasileiro."
+            };
+
+            // Dados de Highlights
+            const highlights = {
+                'h1': {
+                    'gemini': { conf: 'ALTO (Desacoplamento)', cor: 'green-600', tipo: 'Abdutivo / Indutivo', foco: 'Single vs Double Materiality' },
+                    'claude': { conf: 'MÉDIO (Dados Globais)', cor: 'yellow-600', tipo: 'Dedutivo / Probabilístico', foco: 'Comparativo ISE vs Ibovespa' }
+                },
+                'h2': {
+                    'gemini': { conf: 'ALTO (Mecânica Mercado)', cor: 'green-600', tipo: 'Dedutivo', foco: 'Adicionalidade de Portfólio' },
+                    'claude': { conf: 'MÉDIO (Requer Validação)', cor: 'yellow-600', tipo: 'Erro Categorial', foco: 'Ref. Biehler Falsa' }
+                },
+                'h3': {
+                    'gemini': { conf: 'ALTO (Mapeamento Riscos)', cor: 'green-600', tipo: 'Dedutivo / Indutivo', foco: 'Credit Leakage (Vazamento)' },
+                    'claude': null
+                },
+                'h4': {
+                    'gemini': { conf: 'MÉDIO (Análise Spreads)', cor: 'yellow-600', tipo: 'Abdutivo', foco: 'Fricção e Tetos Regulatórios' },
+                    'claude': null
+                }
+            };
+
+            // Constrói HTML para H1 a H4
+            hypotheses.forEach((h, index) => {
+                let sectionHTML = `
+                <section id="${h}-container" class="tab-content ${index === 0 ? 'active' : ''} space-y-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                        <div class="flex-1 pr-4">
+                            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Proposição sob Análise</span>
+                            <h3 class="text-[13px] font-semibold text-gray-700 italic leading-relaxed">"${headers[h]}"</h3>
+                        </div>
+                        <div class="bg-slate-50 p-1.5 rounded-xl border border-gray-100 grid grid-cols-2 xl:grid-cols-[auto_auto_auto] gap-1 shrink-0 self-start lg:self-center">
+                            <button onclick="switchPerspective('${h}', 'gemini')" id="btn-${h}-gemini" class="sub-tab-btn bg-white shadow-sm border border-gray-200 text-brand-dark text-[11px] font-bold px-3 py-2 rounded-lg transition-all col-start-1 row-start-1">Gemini 3.1 Pro Estendido</button>
+                            <button onclick="switchPerspective('${h}', 'claude')" id="btn-${h}-claude" class="sub-tab-btn text-gray-500 hover:bg-gray-200/50 text-[11px] font-semibold px-3 py-2 rounded-lg transition-all col-start-2 row-start-1">Claude Opus 4.6 Thinking</button>
+                            <button onclick="switchPerspective('${h}', 'chatgpt')" id="btn-${h}-chatgpt" class="sub-tab-btn text-gray-500 hover:bg-gray-200/50 text-[11px] font-semibold px-3 py-2 rounded-lg transition-all col-start-1 row-start-2">ChatGPT-5</button>
+                            <button onclick="switchPerspective('${h}', 'copilot')" id="btn-${h}-copilot" class="sub-tab-btn text-gray-500 hover:bg-gray-200/50 text-[11px] font-semibold px-3 py-2 rounded-lg transition-all col-start-2 row-start-2">Copilot Pro</button>
+                            <button onclick="switchPerspective('${h}', 'side')" id="btn-${h}-side" class="sub-tab-btn text-gray-500 hover:bg-gray-200/50 text-[11px] font-semibold px-4 py-2 rounded-lg transition-all col-span-2 xl:col-start-3 xl:row-start-1 xl:row-span-2 flex items-center justify-center">Lado a Lado</button>
+                        </div>
+                    </div>`;
+
+                // Sub-views para cada modelo
+                models.forEach(model => {
+                    let isActive = model === 'gemini' ? 'active' : '';
+                    
+                    if (model === 'side') {
+                        sectionHTML += `
+                        <div id="${h}-view-side" class="side-by-side-grid ${isActive} grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                            <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm"><h4 class="font-bold text-[11px] text-blue-800 uppercase bg-blue-50 px-2 py-1 rounded inline-block mb-3">Gemini 3.1 Pro</h4><p class="text-xs text-gray-600">Conclusão: ${highlights[h]['gemini'] ? highlights[h]['gemini'].conf : 'N/A'}</p></div>
+                            <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm"><h4 class="font-bold text-[11px] text-indigo-800 uppercase bg-indigo-50 px-2 py-1 rounded inline-block mb-3">Claude Opus 4.6</h4><p class="text-xs text-gray-600">Conclusão: ${highlights[h]['claude'] ? highlights[h]['claude'].conf : 'N/A'}</p></div>
+                            <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm border-dashed"><h4 class="font-bold text-[11px] text-gray-500 uppercase bg-gray-100 px-2 py-1 rounded inline-block mb-3">ChatGPT-5</h4><p class="text-xs text-gray-400 italic">Pendente...</p></div>
+                            <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm border-dashed"><h4 class="font-bold text-[11px] text-gray-500 uppercase bg-gray-100 px-2 py-1 rounded inline-block mb-3">Copilot Pro</h4><p class="text-xs text-gray-400 italic">Pendente...</p></div>
+                        </div>`;
+                    } else {
+                        // Construir div do modelo e injetar cards de highlight se existirem
+                        sectionHTML += `<div id="${h}-view-${model}" class="perspective-content ${isActive} space-y-2">`;
+                        
+                        if (highlights[h][model]) {
+                            const hl = highlights[h][model];
+                            sectionHTML += `
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Grau de Confiança</span>
+                                    <span class="text-sm font-bold text-${hl.cor} flex items-center"><span class="w-2 h-2 rounded-full bg-${hl.cor} mr-2"></span>${hl.conf}</span>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Tipo de Argumento</span>
+                                    <span class="text-[13px] font-semibold text-gray-700 block">${hl.tipo}</span>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Foco de Teste Crítico</span>
+                                    <span class="text-[13px] font-semibold text-brand-light block">${hl.foco}</span>
+                                </div>
+                            </div>`;
+                        }
+                        
+                        sectionHTML += `<div id="accordion-container-${h}-${model}"></div></div>`;
+                    }
+                });
+
+                sectionHTML += `</section>`;
+                mainContent.innerHTML += sectionHTML;
+            });
+
+            // Constrói a aba Comparativo Geral (Side)
+            mainContent.innerHTML += `
+            <section id="side-container" class="tab-content space-y-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-brand-dark border-b pb-3 mb-4">Matriz Comparativa Geral de Hipóteses (Todas as IAs)</h3>
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="academic-table comparative-table w-full whitespace-nowrap lg:whitespace-normal">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4">Hipótese TCC</th>
+                                    <th class="w-1/6">Modelo IA</th>
+                                    <th class="w-1/6">Grau de Confiança</th>
+                                    <th class="w-5/12">Foco Crítico / Conclusão Principal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- H1 -->
+                                <tr class="bg-white"><td rowspan="4" class="font-semibold text-gray-700 border-r align-middle">H1: Scores e Eficiência</td><td class="font-bold text-brand-dark">Gemini 3.1 Pro</td><td><span class="text-green-600 font-bold">ALTO</span></td><td class="text-gray-600">Foca no conflito <strong>Single vs Double Materiality</strong>. Scores capturam apenas o risco financeiro do clima (Desacoplamento).</td></tr>
+                                <tr class="bg-white"><td class="font-bold text-brand-light">Claude Opus 4.6</td><td><span class="text-yellow-600 font-bold">MÉDIO</span></td><td class="text-gray-600">Ataca a fragilidade da métrica contrafactual ("emissões evitadas"). Propõe análise WACI via ISE B3.</td></tr>
+                                <tr class="bg-white text-gray-400"><td>ChatGPT-5</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+                                <tr class="bg-white text-gray-400 border-b-4 border-gray-300"><td>Copilot Pro</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+
+                                <!-- H2 -->
+                                <tr class="bg-gray-50"><td rowspan="4" class="font-semibold text-gray-700 border-r align-middle">H2: Disparidade de Alocação</td><td class="font-bold text-brand-dark">Gemini 3.1 Pro</td><td><span class="text-green-600 font-bold">ALTO</span></td><td class="text-gray-600">Base na teoria financeira de adicionalidade. Fuga de capitais no mercado secundário (Equity) prova matematicamente o gap.</td></tr>
+                                <tr class="bg-gray-50"><td class="font-bold text-brand-light">Claude Opus 4.6</td><td><span class="text-yellow-600 font-bold">MÉDIO</span></td><td class="text-gray-600">Foca no Erro Categorial. Alerta para referência falsa (Biehler, 2023). Sugere Difference-in-Differences.</td></tr>
+                                <tr class="bg-gray-50 text-gray-400"><td>ChatGPT-5</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+                                <tr class="bg-gray-50 text-gray-400 border-b-4 border-gray-300"><td>Copilot Pro</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+
+                                <!-- H3 -->
+                                <tr class="bg-white"><td rowspan="4" class="font-semibold text-gray-700 border-r align-middle">H3: Restrição de Crédito</td><td class="font-bold text-brand-dark">Gemini 3.1 Pro</td><td><span class="text-green-600 font-bold">ALTO</span></td><td class="text-gray-600">Identifica a dinâmica de <strong>Credit Leakage</strong> (Vazamento). Tomadores migram para shadow banking quando rejeitados.</td></tr>
+                                <tr class="bg-white text-gray-400"><td class="font-bold text-brand-light">Claude Opus 4.6</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+                                <tr class="bg-white text-gray-400"><td>ChatGPT-5</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+                                <tr class="bg-white text-gray-400 border-b-4 border-gray-300"><td>Copilot Pro</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+
+                                <!-- H4 -->
+                                <tr class="bg-gray-50"><td rowspan="4" class="font-semibold text-gray-700 border-r align-middle">H4: Subsídios e Sinergia</td><td class="font-bold text-brand-dark">Gemini 3.1 Pro</td><td><span class="text-yellow-600 font-bold">MÉDIO</span></td><td class="text-gray-600">Refuta parcialmente através da análise de Spreads tabelados (engessados) do BNDES e da ausência de isenções em IRPJ/CSLL corporativos.</td></tr>
+                                <tr class="bg-gray-50 text-gray-400"><td class="font-bold text-brand-light">Claude Opus 4.6</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+                                <tr class="bg-gray-50 text-gray-400"><td>ChatGPT-5</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+                                <tr class="bg-gray-50 text-gray-400"><td>Copilot Pro</td><td><em>Pendente</em></td><td class="italic">Aguardando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>`;
+
+            // Injeta o conteúdo estruturado nos acordeões de H1 a H4
+            renderAccordions('accordion-container-h1-gemini', h1Gemini, 'Gemini 3.1 Pro');
+            renderAccordions('accordion-container-h1-claude', h1Claude, 'Claude Opus 4.6');
+            renderAccordions('accordion-container-h1-chatgpt', null, 'ChatGPT-5');
+            renderAccordions('accordion-container-h1-copilot', null, 'Copilot Pro');
+
+            renderAccordions('accordion-container-h2-gemini', h2Gemini, 'Gemini 3.1 Pro');
+            renderAccordions('accordion-container-h2-claude', h2Claude, 'Claude Opus 4.6');
+            renderAccordions('accordion-container-h2-chatgpt', null, 'ChatGPT-5');
+            renderAccordions('accordion-container-h2-copilot', null, 'Copilot Pro');
+
+            renderAccordions('accordion-container-h3-gemini', h3Gemini, 'Gemini 3.1 Pro');
+            renderAccordions('accordion-container-h3-claude', null, 'Claude Opus 4.6');
+            renderAccordions('accordion-container-h3-chatgpt', null, 'ChatGPT-5');
+            renderAccordions('accordion-container-h3-copilot', null, 'Copilot Pro');
+
+            renderAccordions('accordion-container-h4-gemini', h4Gemini, 'Gemini 3.1 Pro');
+            renderAccordions('accordion-container-h4-claude', null, 'Claude Opus 4.6');
+            renderAccordions('accordion-container-h4-chatgpt', null, 'ChatGPT-5');
+            renderAccordions('accordion-container-h4-copilot', null, 'Copilot Pro');
+        });
+
+        // Toggle Abas Superiores (Hipóteses)
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.main-tab-btn').forEach(btn => {
+                btn.classList.remove('border-brand-light', 'text-brand-dark', 'font-semibold', 'border-brand-dark');
+                btn.classList.add('border-transparent', 'text-gray-500');
+                
+                // Se for botão Comparativo Geral (inativo = texto azul escuro, sem borda)
+                if(btn.id === 'tab-btn-side') {
+                    btn.classList.remove('text-gray-500');
+                    btn.classList.add('text-brand-dark', 'font-bold');
+                }
+            });
+            
+            const currentBtn = document.getElementById('tab-btn-' + tabId);
+            currentBtn.classList.remove('border-transparent', 'text-gray-500');
+            
+            if(tabId !== 'side') {
+                currentBtn.classList.add('border-brand-light', 'text-brand-dark', 'font-semibold');
+            } else {
+                // Ativa a borda escura se for Comparativo Geral
+                currentBtn.classList.add('border-brand-dark', 'text-brand-dark', 'font-bold');
+            }
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabId + '-container').classList.add('active');
+        }
+
+        // Toggle Perspectivas de IA (Botões Inferiores)
+        function switchPerspective(hypoId, viewId) {
+            const section = document.getElementById(hypoId + '-container');
+            
+            section.querySelectorAll('.sub-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-sm', 'text-brand-dark', 'font-bold', 'border', 'border-gray-200');
+                btn.classList.add('text-gray-500', 'font-semibold', 'hover:bg-gray-200/50');
+            });
+            
+            const selectedBtn = document.getElementById(`btn-${hypoId}-${viewId}`);
+            if (selectedBtn) {
+                selectedBtn.classList.remove('text-gray-500', 'font-semibold', 'hover:bg-gray-200/50');
+                selectedBtn.classList.add('bg-white', 'shadow-sm', 'text-brand-dark', 'font-bold', 'border', 'border-gray-200');
+            }
+
+            section.querySelectorAll('.perspective-content, .side-by-side-grid').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            const selectedView = document.getElementById(`${hypoId}-view-${viewId}`);
+            if (selectedView) {
+                selectedView.classList.add('active');
+            }
+        }
+
+        // Sistema Accordion seguro com ScrollHeight para não cortar/vazar texto
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.accordion-icon');
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                // Aplica limite massivo que sempre suportará tabelas/texto sem vazar
+                content.style.maxHeight = content.scrollHeight + 500 + "px"; 
+                icon.style.transform = "rotate(180deg)";
+            }
+        }
+    </script>
+</body>
+</html>
